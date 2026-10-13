@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", "Iowan Old Style", Palatino, serif;
+  --font-sans: "Outfit", "Segoe UI", sans-serif;
+
+  --color-ink: #102033;
+  --color-navy: #1c3c56;
+  --color-sea: #1f6f8b;
+  --color-sand: #f3eee6;
+  --color-cream: #fbf8f4;
+  --color-gold: #b8893d;
+  --color-gold-light: #e7d3a2;
+  --color-coral: #c4533a;
+  --color-mist: #e6dfd4;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+    overflow-x: clip;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  body {
+    @apply m-0 bg-cream font-sans text-ink antialiased;
+    overflow-x: clip;
+    scrollbar-width: none;
+  }
+
+  * {
+    scrollbar-width: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  #root {
+    min-height: 100svh;
+  }
+
+  section[id],
+  #check-in,
+  #status,
+  #manage {
+    scroll-margin-top: 7.5rem;
+  }
+
+  ::selection {
+    background: #e7d3a2;
+    color: #102033;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .label {
+    @apply block text-[11px] font-semibold uppercase tracking-[0.16em] text-navy/60;
+  }
+
+  .field {
+    color-scheme: light;
+    @apply mt-2 w-full rounded-xl border border-navy/10 bg-white px-3 py-3 text-sm font-normal text-ink outline-none transition placeholder:text-navy/35 focus:border-sea focus:ring-2 focus:ring-sea/20;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-5 py-3 text-sm font-semibold text-ink shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-gold-light hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sea disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0;
+  }
+
+  .btn-ink {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-cream transition duration-300 hover:-translate-y-0.5 hover:bg-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sea disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-cream/40 bg-white/10 px-5 py-3 text-sm font-semibold text-cream backdrop-blur transition duration-300 hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light;
+  }
+
+  .btn-line {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-white px-5 py-3 text-sm font-semibold text-ink transition duration-300 hover:-translate-y-0.5 hover:border-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sea;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(12px, -14px, 0);
+  }
+}
+
+@keyframes ken {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.drift {
+  animation: drift 8s ease-in-out infinite;
+}
+
+.ken {
+  animation: ken 32s ease-out forwards;
+}
+
+.rise {
+  animation: rise 0.55s ease both;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(115%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-rise {
+  animation: hero-rise 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.search-card {
+  animation: card-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes cruise {
+  0% {
+    transform: translate3d(0, 12px, 0) rotate(-12deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(18vw, -36px, 0) rotate(8deg);
+    opacity: 0;
+  }
+}
+
+.cruise {
+  animation: cruise 11s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.draw-x {
+  transform-origin: left center;
+  animation: draw-x 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes plane-along {
+  from {
+    left: 0;
+  }
+  to {
+    left: calc(100% - 1rem);
+  }
+}
+
+.route-plane {
+  left: calc(100% - 1rem);
+  animation: plane-along 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes menu-in {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.menu-in {
+  animation: menu-in 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .drift,
+  .ken,
+  .rise,
+  .hero-rise,
+  .search-card,
+  .cruise,
+  .marquee-track,
+  .draw-x,
+  .route-plane,
+  .menu-in {
+    animation: none;
+  }
+
+  header {
+    transition: none;
+  }
+}
